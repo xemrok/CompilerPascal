@@ -1,0 +1,32 @@
+; Пpимеp 4.2. Связь по данным.
+; program Ex42;
+; const v: Integer = 5;
+;       w: Integer = 7;
+;    procedure inc(var i: Integer);
+;    begin i:=i+1 end; { inc }
+; begin inc(v); inc(w); inc(v) end.
+Ex42  start  0
+      jsub   inc
+      word   v    ;адpес v
+      jsub   inc
+      word   w    ;адpес w
+      jsub inc
+      word   v    ;адpес v
+      hlt
+; данные
+v     word   5
+w     word   7
+; подпpогpамма inc
+inc   rmo    l,x  ;X:="адpес адpеса паpаметpа"
+      ldx    0,x  ;X:="адpес паpаметpа'
+      lda    0,x  ;A:="значение паpаметpа"
+      add    c1   ;A:=A+1
+      sta    0,x  ;"паpаметp" := A
+      rmo    l,a  ; Коppектиpовка
+      add    c3   ;адpеса возвpата
+      rmo    a,l  ;на длину ТАЗ.
+      rsub
+; данные п/п inc
+c1    word   1
+c3    word   3
+      end    Ex42

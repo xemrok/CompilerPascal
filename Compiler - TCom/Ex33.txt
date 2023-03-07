@@ -1,0 +1,35 @@
+; Пример 3.3. Последовательная обработка
+; элементов массива.
+; program Ex33;
+; var i,max: Integer;
+;     d: array[1..5] of Integer;
+; begin
+; max:=d[1];
+; for i:=2 to 5 do
+;    if d[i] > max then max:=d[i];
+; end.
+Ex33  start  0
+      lda    d    ;max:=d[1]
+      sta    max
+      ldx    c3   ;i:=2
+rpt   lda    d,x  ;A:=d[i]
+      comp   max  ;A > max ?
+      jlt    m    ;Переход, если "меньше".
+      jeq    m    ;Пеpеход, если "равно".
+      sta    max  ;max:=A
+m     rmo    x,a  ;i:=i+1
+      add    c3
+      rmo    a,x
+      comp   c15  ;i < 6 ? 
+      jlt    rpt  ;Переход, если "да".
+      hlt
+; данные
+max   resb   3
+c3    word   3
+c15   word   15
+d     word   8
+      word   16
+      word   4
+      word   12
+      word   7
+      end    Ex33

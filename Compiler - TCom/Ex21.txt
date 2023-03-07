@@ -1,0 +1,20 @@
+; Пример 2.1.
+; program Ex21;
+; const v: Integer = 5;
+;       w: Integer = 7;
+; var   z: Integer;
+; begin
+; if w>v then z:=w else z:=v;
+; end.
+Ex21  start  20
+      lda    w    ;A:=w
+      comp   v    ;A > v ?
+      jgt    fin  ;Переход, если "да".
+      lda    v    ;A:=v
+fin   sta    z    ;z:=A
+      hlt
+; данные
+v     word   5
+w     word   7
+z     resb   3
+      end    Ex21

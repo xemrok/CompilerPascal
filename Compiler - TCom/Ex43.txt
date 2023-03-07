@@ -1,0 +1,35 @@
+; Пpимеp 4.3. Два способа пеpедачи паpаметpов.
+; program Ex43;
+; const u:   Integer =15;
+; var   v,w: Integer;
+; procedure copy(x: Integer; var y: Integer);
+;    begin y:=x end; {copy}
+; begin copy(u,v); copy(v,w) end.
+Ex43  start  0
+      lda    u    ;вызов copy(u,v)
+      sta    p11
+      jsub   copy
+p11   resb   3
+p12   word   v
+      lda    v    ;вызов copy(v,w)
+      sta    p21
+      jsub   copy
+p21   resb   3
+p22   word   w
+      hlt
+; данные
+u     word   15
+v     resb   3
+w     resb   3
+; подпpогpамма copy
+copy  rmo    l,x  ;X := "адрес ТАЗ"
+      lda    0,x  ;A := p1
+      ldx    3,x  ;X := p2
+      sta    0,x  ;p2 := A
+      rmo    l,a  ; Коppектиpовка
+      add    c6   ;адpеса возвpата
+      rmo    a,l  ;на длину ТАЗ.
+      rsub
+; данные п/п copy
+c6    word   6
+      end    Ex43

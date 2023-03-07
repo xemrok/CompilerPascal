@@ -1,0 +1,35 @@
+; Пример 4.4. Подпрограмма-функция.
+; program Ex44;
+; const u: Integer = 10;
+; var v,w: Integer;
+; function inc(x: Integer): Integer;
+; begin inc:=x+1 end; { copy }
+; begin v:=inc(u); w:=inc(v) end.
+Ex44  start  0
+      lda    u    ;v:=inc(u)
+      sta    p11
+      jsub   inc
+p11   resb   3
+      sta    v
+      lda    v    ;w:=inc(v)
+      sta    p21
+      jsub   inc
+p21   resb   3
+      sta    w
+      hlt
+; данные
+u     word   17
+v     resb   3
+w     resb   3
+; подпрограмма-функция inc
+inc   rmo    l,x  ;X:="адрес ТАЗ"
+      rmo    l,a  ; Корректировка
+      add    c3   ;адреса возврата
+      rmo    a,l  ;на длину ТАЗ.
+      lda    0,x  ;A:=p1
+      add    c1
+      rsub
+; данные inc
+c1    word   1
+c3    word   3
+      end    Ex44

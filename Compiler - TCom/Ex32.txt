@@ -1,0 +1,21 @@
+; Пример 3.2. Чтение элемента массива с
+; использованием индексной адресации.
+Ex32  start  0
+      lda    i
+      sub    c1
+      mul    c3
+      rmo    a,x  ;X:=A
+      lda    d,x  ;A:=d[i]
+      sta    y
+      hlt 
+; данные
+i     word   3
+c1    word   1
+c3    word   3
+y     resb   3
+d     word   32
+      word   33
+      word   34
+      word   35
+      word   36
+      end    Ex32

@@ -1,0 +1,21 @@
+; Пример 4.1. Связь по управлению.
+; program Ex41;
+; var v: Integer;
+;    procedure inc;
+;    begin v:=v+1 end; { inc }
+; begin v:=1; inc; inc end.
+Ex41  start  0
+      lda    c1
+      sta    v
+      jsub   inc
+      jsub   inc
+      hlt
+; данные
+c1    word   1
+v     resb   3
+; подпрограмма inc
+inc   lda    v
+      add    c1
+      sta    v
+      rsub
+      end    Ex41

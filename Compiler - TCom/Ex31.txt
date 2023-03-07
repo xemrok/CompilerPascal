@@ -1,0 +1,26 @@
+; Пример 3.1. Чтение элемента массива.
+Ex31  start  0
+      lda    i
+      sub    c1
+      mul    c3
+      sta    index
+      lda    com
+      add    index
+      sta    read
+read  resb   3
+      sta    y
+      hlt
+; данные
+i     word   3
+c1    word   1
+c3    word   3
+index resb   3
+com   lda    d
+y     resb   3
+d     word   32
+      word   33
+      word   34
+      word   35
+      word   36
+      end    Ex31
+
