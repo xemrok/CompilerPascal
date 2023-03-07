@@ -1,0 +1,10 @@
+Program Test; 
+var d,b,c,v:integer; 
+begin 
+d:=5; 
+b:=7; 
+c:=6; 
+c:=(d*b*c+d*d)*c/c+c*d; 
+if (d>c)then 
+c:=b+c+d; 
+end.
